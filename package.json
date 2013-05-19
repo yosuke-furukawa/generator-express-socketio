@@ -1,6 +1,6 @@
 {
   "name": "generator-express-socketio",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "yeoman-generator, creates express and socket.io environment",
   "keywords": [
     "yeoman-generator",
