@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
+  app.use(require('connect-livereload')());
   app.use(express.errorHandler());
 }
 

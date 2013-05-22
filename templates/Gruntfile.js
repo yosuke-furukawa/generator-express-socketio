@@ -1,30 +1,49 @@
 module.exports = function (grunt) {
 
   grunt.initConfig({
+    bower: {
+      install: {
+        options: {
+          targetDir: './public/javascripts',
+          layout: 'byType',
+          install: true,
+          verbose: false,
+          cleanTargetDir: true,
+          cleanBowerDir: false
+        }
+      }
+    },
     pkg: grunt.file.readJSON('package.json'),
     develop: {
       server: {
         file: 'app.js'
       }
     },
-    regarde: {
-      js: {
+    watch: {
+      options: {
+        livereload: true,
+      },
+      scripts: {
         files: [
           'app.js',
           'routes/*.js'
         ],
-        tasks: ['develop', 'delayed-livereload']
+        task: "develop",
+        options: {
+          debounceDelay: true,
+        }
+      },
+      js: {
+        files: ['public/javascripts/*.js'],
       },
       css: {
         files: ['public/stylesheets/*.css'],
-        tasks: ['livereload']
       },
       jade: {
         files: ['views/*.jade'],
-        tasks: ['livereload']
       }
     }
-	});
+  });
   grunt.registerTask('delayed-livereload', 'delayed livereload', function () {
     var done = this.async();
     setTimeout(function () {
@@ -32,8 +51,10 @@ module.exports = function (grunt) {
       done();
     }, 500);
   });
-	grunt.loadNpmTasks('grunt-develop');
+  grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-develop');
   grunt.loadNpmTasks('grunt-regarde');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-livereload');
 
   grunt.registerTask('default', ['livereload-start', 'develop', 'regarde']);

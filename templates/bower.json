@@ -7,7 +7,12 @@
     "components"
   ],
   "dependencies": {
-    "jquery": "latest",
-    "underscore": "latest"
+    "jquery": "latest"
+  },
+  "exportsOverride": {
+    "jquery" : {
+      "js": "**/*.js",
+      "css": "**/*.css"
+    }
   }
 }
